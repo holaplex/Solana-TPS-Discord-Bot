@@ -5,7 +5,7 @@ const bot = new Discord.Client();
 
 const url = "https://explorer.solana.com/";
 
-const interval_in_sec = 10
+const interval_in_sec = 60
 
 async function getTPS (){
   const browser = await chromium.launch({ chromiumSandbox: false });
