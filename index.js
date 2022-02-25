@@ -5,7 +5,7 @@ const bot = new Discord.Client();
 
 const url = "https://explorer.solana.com/";
 
-const interval_in_sec = 60
+const interval_in_sec = 10
 
 async function getTPS (){
   const browser = await chromium.launch({ chromiumSandbox: false });
@@ -18,8 +18,12 @@ async function getTPS (){
   const tps = tables[1].split("(TPS)")[1].trim();
   await browser.close();
   let emoji_status = ""
-  if (Number(tps) > 2000){ emoji_status = "🟢";}else { emoji_status = "🟠";}
-  bot.user.setActivity(String(tps + " TPS " + emoji_status ));
+  if (Number(tps.replace(',','')) > 2000){ 
+    emoji_status = "🟢";
+  }else { 
+    emoji_status = "🟠";
+  }
+  bot.user.setStatus(String(tps + " TPS " + emoji_status ));
   console.log(`[${Date()}] scraped - ${tps}`);
 };
 
