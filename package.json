@@ -1,0 +1,20 @@
+{
+  "name": "discordtpsbot",
+  "version": "1.0.0",
+  "description": "Discord Bot that reports current Solana network TPS conditions",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jason Schorr (0xBanana) jason@holaplex.com",
+  "license": "ISC",
+  "engines": {
+    "node": "16.x"
+  },
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2",
+    "playwright-chromium": "^1.19.2"
+  }
+}
