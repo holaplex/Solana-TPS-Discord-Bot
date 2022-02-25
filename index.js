@@ -23,7 +23,7 @@ async function getTPS (){
   }else { 
     emoji_status = "🟠";
   }
-  bot.user.setStatus(String(tps + " TPS " + emoji_status ));
+  bot.user.setActivity(String(tps + " TPS " + emoji_status ));
   console.log(`[${Date()}] scraped - ${tps}`);
 };
 
