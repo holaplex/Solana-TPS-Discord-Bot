@@ -17,8 +17,9 @@ async function getTPS (){
   const tables = await page.locator("table").allTextContents();
   const tps = tables[1].split("(TPS)")[1].trim();
   await browser.close();
-
-  bot.user.setActivity(String(tps + " TPS"));
+  let emoji_status = ""
+  (tps > 2000) ?  emoji_status = "🟢" : emoji_status = "🟠"
+  bot.user.setActivity(String(tps + " TPS " + emoji_status ));
   console.log(`[${Date()}] scraped - ${tps}`);
 };
 
