@@ -8,7 +8,6 @@ const url = "https://explorer.solana.com/";
 const interval_in_sec = 60
 
 async function getTPS (){
-  console.log(`[${Date()}] begin scrape`);
   const browser = await chromium.launch({ chromiumSandbox: false });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -20,7 +19,7 @@ async function getTPS (){
   await browser.close();
 
   bot.user.setActivity(String(tps + " TPS"));
-  bot.user.setUsername("Solana TPS Bot");
+  console.log(`[${Date()}] scraped - ${tps}`);
 };
 
 bot.on('ready', () => {
