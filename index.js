@@ -6,6 +6,7 @@ const bot = new Discord.Client();
 const url = "https://explorer.solana.com/";
 
 const interval_in_sec = 60
+const moons = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"]
 
 async function getTPS (){
   const browser = await chromium.launch({ chromiumSandbox: false });
@@ -18,18 +19,31 @@ async function getTPS (){
   const tps = tables[1].split("(TPS)")[1].trim();
   await browser.close();
   let emoji_status = ""
-  if (Number(tps.replace(',','')) > 2000){ 
-    emoji_status = "🟢";
-  }else { 
+  if (Number(tps.replace(',','')) < 1500){ 
+    emoji_status = "🚫";
+  }
+  
+  if (Number(tps.replace(',','')) > 1500){ 
     emoji_status = "🟠";
   }
+
+  if (Number(tps.replace(',','')) > 2000){ 
+    emoji_status = "🟢";
+  }
+
+
   bot.user.setActivity(String(tps + " TPS " + emoji_status ));
   console.log(`[${Date()}] scraped - ${tps}`);
 };
 
 bot.on('ready', () => {
   setInterval(getTPS, interval_in_sec * 1000);
-  bot.user.setActivity(String("Starting up..."));
+  for (i = 0; i < 59; i++){
+    bot.user.setActivity(String("Starting up..." + moons[i%moons.length]));
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+  }
+  
 });
 
 bot.login(process.env.BOT_TOKEN);
