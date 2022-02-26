@@ -40,7 +40,8 @@ bot.on('ready', () => {
   setInterval(getTPS, interval_in_sec * 1000);
   for (i = 0; i < 59; i++){
     bot.user.setActivity(String("Starting up..." + moons[i%moons.length]));
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    var waitTill = new Date(new Date().getTime() + (1 * 1000));
+    while(waitTill > new Date()){}
     
   }
   
