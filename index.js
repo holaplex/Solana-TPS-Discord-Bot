@@ -10,6 +10,8 @@ const moons = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"]
 
 async function getTPS() {
   let tps = "...";
+  let emoji_status = "";
+
   try {
     const browser = await chromium.launch({ chromiumSandbox: false });
     const context = await browser.newContext();
@@ -20,7 +22,6 @@ async function getTPS() {
     const tables = await page.locator("table").allTextContents();
     tps = tables[1].split("(TPS)")[1].trim();
     await browser.close();
-    let emoji_status = ""
     if (Number(tps.replace(',', '')) < 1500) {
       emoji_status = "🚫";
     }
